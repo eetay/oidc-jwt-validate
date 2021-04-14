@@ -2,9 +2,8 @@ const jwkToPem = require('jwk-to-pem')
 const jwt = require('jsonwebtoken')
 const fetch = require('node-fetch')
 
-const token = 'ey...'
-
-const jwkUrl = 'https://login.microsoftonline.com/.../discovery/v2.0/keys'
+const {token, jwkUrl} = require('./config')
+console.log(jwkUrl)
 
 function validate(keys, token) {
 	const tokenHeaderB64 = token.split('.')[0]
