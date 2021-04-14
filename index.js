@@ -8,12 +8,12 @@ console.log(jwkUrl)
 function validate(keys, token) {
 	const tokenHeaderB64 = token.split('.')[0]
 	const tokenHeader = Buffer.from(tokenHeaderB64, 'base64').toString()
-	const kid = JSON.parse(tokenHeader).kid
+	const {kid, alg} = JSON.parse(tokenHeader)
 	console.log("TOKEN HEADER INFO:", tokenHeader)
 	jwk = keys.filter(x=>x.kid == kid)[0]
 	const pem = jwkToPem(jwk)
 	console.log(pem)
-	var decoded = jwt.verify(token, pem, { algorithms: [ 'RS256' ] });
+	var decoded = jwt.verify(token, pem, { algorithms: [ alg ] });
 	console.log(decoded)
 }
 
